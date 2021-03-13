@@ -92,12 +92,12 @@ fn list_proxies() -> BoxResult<Vec<Proxy>> {
 }
 
 #[derive(Debug)]
-struct ProxyWithLatancy {
+struct ProxyWithLatency {
     proxy: Proxy,
     latancy: std::time::Duration,
 }
 
-async fn get_proxy_details(proxy: Proxy) -> BoxResult<ProxyWithLatancy> {
+async fn get_proxy_details(proxy: Proxy) -> BoxResult<ProxyWithLatency> {
     let start = std::time::Instant::now();
 
     let rproxy = reqwest::Proxy::http(&format!(
@@ -124,7 +124,7 @@ async fn get_proxy_details(proxy: Proxy) -> BoxResult<ProxyWithLatancy> {
         }
     }
 
-    Ok(ProxyWithLatancy {
+    Ok(ProxyWithLatency {
         proxy,
         latancy: start.elapsed(),
     })
